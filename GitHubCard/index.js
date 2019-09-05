@@ -14,7 +14,10 @@
            create a new component and add it to the DOM as a child of .cards
 */
 
-const addGithubCard = (githubLink) => {
+const GITHUB_API = 'https://api.github.com/users/';
+
+const addGithubCard = (username) => {
+  const githubLink = `${GITHUB_API}${username}`
   axios.get(githubLink)
     .then(response => response.data)
     .then(data => {
@@ -24,7 +27,7 @@ const addGithubCard = (githubLink) => {
     })
 }
 
-addGithubCard('https://api.github.com/users/Omulosi')
+addGithubCard('Omulosi');
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -45,8 +48,7 @@ const followersArray = [
 ]
 
 followersArray.forEach((username) => {
-  const githubLink = `https://api.github.com/users/${username}`;
-  addGithubCard(githubLink);
+  addGithubCard(username);
 })
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -119,6 +121,12 @@ function GithubCard(data) {
 
   card.appendChild(imgURL)
   card.appendChild(cardInfo);
+
+  //create a container for embedding github contribution graph
+  // const graphDiv = document.createElement('div');
+  // graphDiv.classList.add('calendar');
+
+  // card.appendChild(graphDiv);
 
   return card;
 }
