@@ -2,6 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/Omulosi');
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -45,6 +46,49 @@ const followersArray = [];
 </div>
 
 */
+
+function GithubCard(data) {
+  const card = document.createElement('div');
+  const imgURL = document.createElement(img);
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const username = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const profileLink = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  card.classList.add('card');
+  imgURL.setAttribute('src', avatar_url);
+  name.classList.add('name');
+  name.textContent = name;
+  username.classList.add('username');
+  username.textContent = login;
+  location.textContent = `Location: ${location}`;
+  profile.textContent = `Profile: `;
+  profileLink.textContent = url;
+  profileLink.setAttribute('href', url);
+  followers.textContent = `Followers: ${followers}`;
+  following.textContent= `Following: ${following}`;
+  bio.textContent =`Bio: ${bio}`;
+
+  profile.appendChild(profileLink);
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  card.appendChild(imgURL)
+  card.appendChild(cardInfo);
+
+  return card;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
