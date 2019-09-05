@@ -15,9 +15,11 @@
 */
 
 axios.get('https://api.github.com/users/Omulosi')
-  .then(response => response.date)
+  .then(response => response.data)
   .then(data => {
-    GithubCard(data)
+    const parent = document.querySelector('.cards');
+    const gCard = GithubCard(data);
+    parent.appendChild(gCard);
   })
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -66,38 +68,38 @@ function GithubCard(data) {
   const card = document.createElement('div');
   const imgURL = document.createElement('img');
   const cardInfo = document.createElement('div');
-  const name = document.createElement('h3');
+  const nameElem = document.createElement('h3');
   const username = document.createElement('p');
-  const location = document.createElement('p');
+  const locationElem = document.createElement('p');
   const profile = document.createElement('p');
   const profileLink = document.createElement('a');
-  const followers = document.createElement('p');
-  const following = document.createElement('p');
-  const bio = document.createElement('p');
+  const followersElem = document.createElement('p');
+  const followingElem = document.createElement('p');
+  const bioElem = document.createElement('p');
 
   card.classList.add('card');
   imgURL.setAttribute('src', avatar_url);
-  name.classList.add('name');
-  name.textContent = name;
+  nameElem.classList.add('name');
+  nameElem.textContent = name;
   username.classList.add('username');
   username.textContent = login;
-  location.textContent = `Location: ${location}`;
+  locationElem.textContent = `Location: ${location}`;
   profile.textContent = `Profile: `;
   profileLink.textContent = url;
   profileLink.setAttribute('href', url);
-  followers.textContent = `Followers: ${followers}`;
-  following.textContent= `Following: ${following}`;
-  bio.textContent =`Bio: ${bio}`;
-
+  followersElem.textContent = `Followers: ${followers}`;
+  followingElem.textContent= `Following: ${following}`;
+  bioElem.textContent =`Bio: ${bio}`;
+;
   profile.appendChild(profileLink);
 
-  cardInfo.appendChild(name);
+  cardInfo.appendChild(nameElem);
   cardInfo.appendChild(username);
-  cardInfo.appendChild(location);
+  cardInfo.appendChild(locationElem);
   cardInfo.appendChild(profile);
-  cardInfo.appendChild(followers);
-  cardInfo.appendChild(following);
-  cardInfo.appendChild(bio);
+  cardInfo.appendChild(followersElem);
+  cardInfo.appendChild(followingElem);
+  cardInfo.appendChild(bioElem);
 
   card.appendChild(imgURL)
   card.appendChild(cardInfo);
