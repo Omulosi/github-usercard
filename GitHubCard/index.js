@@ -14,13 +14,18 @@
            create a new component and add it to the DOM as a child of .cards
 */
 
-axios.get('https://api.github.com/users/Omulosi')
-  .then(response => response.data)
-  .then(data => {
-    const parent = document.querySelector('.cards');
-    const gCard = GithubCard(data);
-    parent.appendChild(gCard);
-  })
+const addGithubCard = (githubLink) => {
+  axios.get(githubLink)
+    .then(response => response.data)
+    .then(data => {
+      const parent = document.querySelector('.cards');
+      const gCard = GithubCard(data);
+      parent.appendChild(gCard);
+    })
+}
+
+addGithubCard('https://api.github.com/users/Omulosi')
+
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -41,13 +46,7 @@ const followersArray = [
 
 followersArray.forEach((username) => {
   const githubLink = `https://api.github.com/users/${username}`;
-  axios.get(githubLink)
-    .then(response => response.data)
-    .then(data => {
-      const parent = document.querySelector('.cards');
-      const gCard = GithubCard(data);
-      parent.appendChild(gCard);
-    })
+  addGithubCard(githubLink);
 })
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -107,7 +106,7 @@ function GithubCard(data) {
   followersElem.textContent = `Followers: ${followers}`;
   followingElem.textContent= `Following: ${following}`;
   bioElem.textContent =`Bio: ${bio}`;
-;
+
   profile.appendChild(profileLink);
 
   cardInfo.appendChild(nameElem);
